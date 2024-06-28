@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+        .profile-info {
+            margin-bottom: 20px;
+        }
+        .profile-photo {
+            width: 150px;
+            height: auto;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: block;
+            box-shadow: 0 0 5px rgba(0,0,0,0.3);
+        }
+        .logout-btn {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>User Profile</h1>
+
+        <?php
+        // Include the PHP script that fetches user profile details
+        include 'fetch_profile.php';
+        ?>
+
+        <!-- Profile Photo -->
+        <img src="path_to_your_profile_photo.jpg" alt="Profile Photo" class="profile-photo">
+
+        <div class="logout-btn">
+            <a href="logout.php" class="btn btn-danger">Logout</a>
+        </div>
+    </div>
+</body>
+
+</html>

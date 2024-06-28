@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="min-h-screen bg-white text-black">
+        <div class="flex">
+            <div class="w-64 bg-gray-100 p-4">
+                <div class="text-yellow-600 text-2xl font-bold mb-6">Crypto</div>
+                <nav class="space-y-4">
+                    <a href="dashboard1.html" class="flex items-center text-gray-700 hover:text-black">
+                        <img src="images/home.jpg" alt="home" class="mr-2 w-6 h-6" />
+                        Home
+                    </a>
+                    <a href="Investment Dashboard.html" class="flex items-center text-gray-700 hover:text-black">
+                        <img src="images/Letter P with phoenix concept logo.jpg" alt="portfolio" class="mr-2 w-6 h-6" />
+                        My Portfolio
+                    </a>
+                    <a href="stockdashboard.html" class="flex items-center text-gray-700 hover:text-black">
+                        <img src="images/stock logo.jpg" alt="stock" class="mr-2 h-6 w-6" />
+                        Stocks
+                    </a>
+                    <a href="equitydashboard.html" class="flex items-center text-gray-700 hover:text-black">
+                        <img src="images/equity.jpg" alt="equity" class="mr-2 w-6 h-6" />
+                        Equity
+                    </a>
+                    <a href="commoditydashboard.html" class="flex items-center text-gray-700 hover:text-black">
+                        <img src="images/commodity.jpg" alt="Commodity" class="mr-2 w-6 h-6" />
+                        Commodity
+                    </a>
+                    <a href="fundsdashboard.html" class="flex items-center text-gray-700 hover:text-black">
+                        <img src="images/funds.jpg" alt="Funds" class="mr-2 w-6 h-6" />
+                        Funds
+                    </a>
+                    <a href="settings.html" class="flex items-center text-gray-700 hover:text-black">
+                        <img src="images/Settings_(iOS).png" alt="settings" class="mr-2 w-6 h-6" />
+                        Settings
+                    </a>
+                    <a href="logout.php" class="flex items-center p-2 mb-2">
+                        <img src="images/logout.jpg
+                        " alt="Logout Icon" class="mr-2 w-6 h-6"> 
+                        Logout
+                    </a>
+                </nav>
+                <div class="mt-8 p-4 bg-gray-200 rounded-lg">
+                    <div class="text-gray-600">Your Wallet</div>
+                    <div class="flex items-center space-x-2 mt-2">
+                        <img src="images/bitcoin.jpg" alt="btc" class="mr-2 w-6 h-6" />
+                    </div>
+                    <div class="mt-4 text-lg font-bold">1.3455609 BTC</div>
+                    <div class="text-gray-600">$56,890</div>
+                </div>
+            </div>
+            <div class="flex-1 p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <div class="text-2xl font-bold">Home / Assets</div>
+                    <div class="flex items-center space-x-4">
+                        <div class="text-gray-600">Market Cap: $3.4T <span class="text-green-600">▲4.10%</span></div>
+                        <div class="text-gray-600">Exchanges: 789 <span class="text-red-500">▼1.05%</span></div>
+                        <div class="text-gray-600">24h Vol: <span class="text-green-600">▲1.05%</span></div>
+                        <div class="text-gray-600">Dominance: BTC: 51.2% ETH: 17.7% <span class="text-red-500">▼1.05%</span></div>
+                        <div class="text-gray-600">Cryptos: 2M+ <span class="text-green-600">▲1.05%</span></div>
+                    </div>
+                </div>
+                <div class="bg-gray-200 p-6 rounded-lg">
+                    <div id="crypto-sections">
+                        <!-- Sections for each cryptocurrency will be dynamically added here -->
+                    </div>
+                    <div class="mt-6">
+                        <select id="crypto-select" class="bg-gray-300 p-2 rounded-lg text-black">
+                            <option value="bitcoin">Bitcoin BTC</option>
+                            <option value="ethereum">Ethereum ETH</option>
+                            <option value="tether">Tether USDT</option>
+                            <option value="binancecoin">Binance Coin BNB</option>
+                            <option value="usd-coin">USD Coin USDC</option>
+                        </select>
+                        <canvas id="trendChart" width="600" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-zinc-800 p-4 rounded">
+        <h2 class="text-lg font-bold mb-2">Investment Details</h2>
+        <p class="text-2xl font-bold">$178,975</p>
+        <p class="text-green-500">6.75% This Month</p>
+        <canvas id="investmentPieChart" width="300" height="150"></canvas>
+    </div>
+    
+    <script>
+        const cryptoData = [
+            { name: "Bitcoin BTC", symbol: "BTC", invested: 1.3455609, price: 48987.90 },
+            { name: "Ethereum ETH", symbol: "ETH", invested: 10.543, price: 2450.00 },
+            { name: "Tether USDT", symbol: "USDT", invested: 5000, price: 1.00 },
+            { name: "Binance Coin BNB", symbol: "BNB", invested: 50, price: 350.00 },
+            { name: "USD Coin USDC", symbol: "USDC", invested: 3000, price: 1.00 }
+        ];
+
+        function createCryptoSection(crypto) {
+            const section = document.createElement('div');
+            section.classList.add('mb-6', 'p-4', 'bg-gray-200', 'rounded-lg');
+            section.innerHTML = `
+                <div class="flex justify-between items-center">
+                    <div>
+                        <div class="text-yellow-600 text-xl font-bold">${crypto.name}</div>
+                        <div class="text-4xl font-bold" id="${crypto.symbol}-price">$${crypto.price.toFixed(2)}</div>
+                        <div class="text-green-600">Invested: ${crypto.invested} ${crypto.symbol}</div>
+                    </div>
+                    <div class="flex space-x-4">
+                        <button class="bg-gray-300 p-2 rounded-lg">Buy</button>
+                        <button class="bg-gray-300 p-2 rounded-lg">Sell</button>
+                        <button class="bg-gray-300 p-2 rounded-lg">Convert</button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('crypto-sections').appendChild(section);
+        }
+
+        cryptoData.forEach(createCryptoSection);
+
+        const ctx = document.getElementById('trendChart').getContext('2d');
+        const trendChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Price',
+                    data: [],
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        const pieCtx = document.getElementById('investmentPieChart').getContext('2d');
+        const investmentPieChart = new Chart(pieCtx, {
+       type: 'pie',
+         data: {
+        labels: ['Money Market', 'Crypto', 'Stock', 'Equity', 'Commodity', 'Funds'],
+        datasets: [{
+            data: [42, 15, 19, 6, 6, 6],
+            backgroundColor: [
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 206, 86, 0.2)'
+            ],
+            borderColor: [
+                'rgba(153, 102, 255, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(255, 206, 86, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+    }
+});
+
+
+        async function fetchCryptoData() {
+            const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether,binancecoin,usd-coin&vs_currencies=usd');
+            const data = await response.json();
+            return {
+                BTC: data.bitcoin.usd,
+                ETH: data.ethereum.usd,
+                USDT: data.tether.usd,
+                BNB: data.binancecoin.usd,
+                USDC: data['usd-coin'].usd
+            };
+        }
+
+        async function fetchCryptoTrends(cryptoId) {
+            const response = await fetch(`https://api.coingecko.com/api/v3/coins/${cryptoId}/market_chart?vs_currency=usd&days=1`);
+            const data = await response.json();
+            return data.prices;
+        }
+
+        async function updatePrices() {
+            const prices = await fetchCryptoData();
+            cryptoData.forEach(crypto => {
+                const priceElement = document.getElementById(`${crypto.symbol}-price`);
+                const newPrice = prices[crypto.symbol];
+                priceElement.textContent = `$${newPrice.toFixed(2)}`;
+                crypto.price = newPrice;
+            });
+        }
+
+        async function updateTrends() {
+            const cryptoId = document.getElementById('crypto-select').value;
+            const trends = await fetchCryptoTrends(cryptoId);
+            trendChart.data.labels = trends.map(t => new Date(t[0]).toLocaleTimeString());
+            trendChart.data.datasets[0].data = trends.map(t => t[1]);
+            trendChart.update();
+        }
+
+        document.getElementById('crypto-select').addEventListener('change', updateTrends);
+
+        setInterval(updatePrices, 5000);
+        updateTrends(); // Initial update
+
+    </script>
+</body>
+
+</html>

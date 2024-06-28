@@ -1,0 +1,156 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="flex flex-col h-screen bg-zinc-100 dark:bg-zinc-900">
+  
+  <div class="flex items-center justify-between p-4 bg-zinc-800 dark:bg-zinc-700 text-white">
+    <div class="flex items-center space-x-4">
+      <img src="https://placehold.co/30x30" alt="Logo" class="rounded-full">
+      <span class="text-lg font-semibold">Space / Task Management</span>
+    </div>
+    <div class="flex items-center space-x-4">
+      <button class="bg-purple-600 text-white px-4 py-2 rounded">Ask AI</button>
+      <button class="bg-pink-600 text-white px-4 py-2 rounded">Add task</button>
+    </div>
+  </div>
+  
+  <div class="flex flex-col md:flex-row bg-zinc-200 dark:bg-zinc-800 p-4 space-y-2 md:space-y-0 md:space-x-4">
+    <button class="text-zinc-700 dark:text-zinc-300"onclick="location.href='taskmanagepage2.html'">Overview</button>
+    <button class="text-zinc-700 dark:text-zinc-300" onclick="location.href='tb2.html'">Board</button>
+    <button class="text-zinc-700 dark:text-zinc-300 border-b-2 border-purple-600" onclick="location.href='priority.html'">By Priority</button>
+  </div>
+  
+  <div class="flex flex-wrap items-center bg-zinc-100 dark:bg-zinc-900 p-4 space-x-2">
+    <button class="bg-purple-100 text-purple-600 px-4 py-2 rounded">Group: Priority</button>
+    <button class="bg-purple-100 text-purple-600 px-4 py-2 rounded">Subtasks: Collapse all</button>
+    <button class="bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300 px-4 py-2 rounded">Columns</button>
+    <button class="bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300 px-4 py-2 rounded">Filters</button>
+    <button class="bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300 px-4 py-2 rounded">Me mode</button>
+    <button class="bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300 px-4 py-2 rounded">Assignees</button>
+    <button class="bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300 px-4 py-2 rounded">Show closed</button>
+    <button class="bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300 px-4 py-2 rounded">Hide</button>
+  </div>
+  
+  <div class="flex-1 overflow-y-auto p-4">
+    
+    <div class="mb-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+          <span class="text-red-600">🔴</span>
+          <span class="font-semibold">Urgent</span>
+        </div>
+        <button class="text-blue-600">+ Add Task</button>
+      </div>
+      <div class="mt-2 space-y-2">
+        <div class="flex items-center justify-between bg-white dark:bg-zinc-800 p-2 rounded">
+          <div class="flex items-center space-x-2">
+            <span class="text-blue-600">🔵</span>
+            <span>Finalize Budget</span>
+          </div>
+          <div class="flex items-center space-x-4">
+            <span class="text-zinc-600 dark:text-zinc-300">Assignee</span>
+            <span class="text-zinc-600 dark:text-zinc-300">Due date</span>
+            <span class="bg-blue-600 text-white px-2 py-1 rounded">IN PROGRESS</span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between bg-white dark:bg-zinc-800 p-2 rounded">
+          <div class="flex items-center space-x-2">
+            <span class="text-zinc-600">⚪</span>
+            <span>Schedule Team Meeting</span>
+          </div>
+          <div class="flex items-center space-x-4">
+            <span class="text-zinc-600 dark:text-zinc-300">Assignee</span>
+            <span class="text-zinc-600 dark:text-zinc-300">Due date</span>
+            <span class="bg-zinc-600 text-white px-2 py-1 rounded">TO DO</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<div class="mb-4">
+  <div class="flex items-center justify-between">
+    <div class="flex items-center space-x-2">
+      <span class="text-yellow-600">🟡</span>
+      <span class="font-semibold">High</span>
+    </div>
+    <button class="text-blue-600">+ Add Task</button>
+  </div>
+  <div class="mt-2 space-y-2">
+    <div class="flex items-center justify-between bg-white dark:bg-zinc-800 p-2 rounded">
+      <div class="flex items-center space-x-2">
+        <span class="text-blue-600">🔵</span>
+        <span>Review Proposal</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <span class="text-zinc-600 dark:text-zinc-300">Assignee</span>
+        <span class="text-zinc-600 dark:text-zinc-300">Due date</span>
+        <span class="bg-blue-600 text-white px-2 py-1 rounded">IN PROGRESS</span>
+      </div>
+    </div>
+    <div class="flex items-center justify-between bg-white dark:bg-zinc-800 p-2 rounded">
+      <div class="flex items-center space-x-2">
+        <span class="text-blue-600">🔵</span>
+        <span>Send Project Update</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <span class="text-zinc-600 dark:text-zinc-300">Assignee</span>
+        <span class="text-zinc-600 dark:text-zinc-300">Due date</span>
+        <span class="bg-blue-600 text-white px-2 py-1 rounded">IN PROGRESS</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="mb-4">
+  <div class="flex items-center justify-between">
+    <div class="flex items-center space-x-2">
+      <span class="text-blue-600">🔵</span>
+      <span class="font-semibold">Normal</span>
+    </div>
+    <button class="text-blue-600">+ Add Task</button>
+  </div>
+  <div class="mt-2 space-y-2">
+    <div class="flex items-center justify-between bg-white dark:bg-zinc-800 p-2 rounded">
+      <div class="flex items-center space-x-2">
+        <span class="text-zinc-600">⚪</span>
+        <span>Revise Handbook</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <span class="text-zinc-600 dark:text-zinc-300">Assignee</span>
+        <span class="text-zinc-600 dark:text-zinc-300">Due date</span>
+        <span class="bg-zinc-600 text-white px-2 py-1 rounded">TO DO</span>
+      </div>
+    </div>
+    <div class="flex items-center justify-between bg-white dark:bg-zinc-800 p-2 rounded">
+      <div class="flex items-center space-x-2">
+        <span class="text-zinc-600">⚪</span>
+        <span>Update Website</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <span class="text-zinc-600 dark:text-zinc-300">Assignee</span>
+        <span class="text-zinc-600 dark:text-zinc-300">Due date</span>
+        <span class="bg-zinc-600 text-white px-2 py-1 rounded">TO DO</span>
+      </div>
+    </div>
+    <div class="flex items-center justify-between bg-white dark:bg-zinc-800 p-2 rounded">
+      <div class="flex items-center space-x-2">
+        <span class="text-zinc-600">⚪</span>
+        <span>Conduct Audit</span>
+      </div>
+      <div class="flex items-center space-x-4">
+        <span class="text-zinc-600 dark:text-zinc-300">Assignee</span>
+        <span class="text-zinc-600 dark:text-zinc-300">Due date</span>
+        <span class="bg-zinc-600 text-white px-2 py-1 rounded">TO DO</span>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+</div>
+  </body>
+</html>

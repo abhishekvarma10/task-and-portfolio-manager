@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet"> <!-- Assuming you have a separate style.css file for your project -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard1.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            background-color: #f0f0f0;
+            padding: 20px;
+            display: flex;
+        }
+
+        h1,
+        h2 {
+            color: #333;
+        }
+
+        .sidebar {
+            width: 200px;
+            background-color: #fff;
+            padding: 20px;
+            margin-right: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar a {
+            color: #333;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar a:hover {
+            color: #000;
+        }
+
+        .dropdown>a {
+            cursor: pointer;
+        }
+
+        .dropdown ul {
+            display: none;
+            list-style-type: none;
+            padding-left: 15px;
+        }
+
+        .dropdown:hover ul {
+            display: block;
+        }
+
+        section {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex: 1;
+        }
+
+        .taskCard {
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            color: #333;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .taskCard h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .deleteBtn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .deleteBtn:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth'
+            });
+            calendar.render();
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var navButton = document.getElementById('nav-button');
+            var isRegistered = <?php echo json_encode($isRegistered); ?>;
+
+            if (isRegistered) {
+                navButton.href = 'Investment Dashboard.html'; // Redirect to dashboard
+            } else {
+                navButton.href = 'registrationform.html'; // Redirect to registration form
+            }
+
+            document.getElementById('taskForm').addEventListener('submit', function (event) {
+                event.preventDefault();
+                var taskName = document.getElementById('taskName').value;
+                var taskDate = document.getElementById('taskDate').value;
+                var taskTime = document.getElementById('taskTime').value;
+                var taskPriority = document.getElementById('taskPriority').value;
+                var taskDateTime = taskDate + ' ' + taskTime;
+
+                var taskCard = document.createElement('div');
+                taskCard.classList.add('taskCard', 'card', 'mb-3');
+
+                var taskHeader = document.createElement('h3');
+                taskHeader.classList.add('card-header');
+                taskHeader.textContent = taskName + ' - ' + taskDateTime + ' (' + taskPriority + ')';
+                taskCard.appendChild(taskHeader);
+
+                var deleteBtn = document.createElement('button');
+                deleteBtn.textContent = 'Delete';
+                deleteBtn.classList.add('deleteBtn', 'btn', 'btn-danger');
+                deleteBtn.addEventListener('click', function () {
+                    taskCard.remove();
+                });
+                taskCard.appendChild(deleteBtn);
+
+                document.getElementById('taskList').appendChild(taskCard);
+
+                // Clear input fields
+                document.getElementById('taskName').value = '';
+                document.getElementById('taskDate').value = '';
+                document.getElementById('taskTime').value = '';
+                document.getElementById('taskPriority').value = 'Low';
+
+                // Set alarm
+                var alarmDateTime = new Date(taskDateTime);
+                var now = new Date();
+                var timeUntilAlarm = alarmDateTime - now;
+                if (timeUntilAlarm > 0) {
+                    setTimeout(function () {
+                        alert('Task: ' + taskName + '\nDate & Time: ' + taskDateTime);
+                    }, timeUntilAlarm);
+                } else {
+                    alert('Task: ' + taskName + '\nDate & Time: ' + taskDateTime + '\nTask is overdue!');
+                }
+            });
+        });
+
+        function sendMessageToChatbot(message) {
+            fetch('http://localhost:5000/chatbot', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle chatbot response
+                console.log('Chatbot response:', data);
+                // Update HTML content to display chatbot response
+                document.getElementById('chatbot-response').textContent = data.response;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <?php include 'session_check.php'; ?>
+    <div class="sidebar">
+        <img src="images/myself.jpg" alt="Profile Picture" class="img-fluid mr-2">Abhishek
+        <ul>
+            <li><a href="profile.html"><img src="assets/images/vector.png" alt="profile" class="img-fluid">Profile</a></li>
+            <li><a href="#"><img src="images/dashboard.jpg" alt="Dashboard Icon" class="img-fluid mr-2"> Dashboard</a></li>
+            <li class="dropdown">
+                <a><img src="images/task1.jpg" alt="Tasks Icon" class="img-fluid mr-2"><span>Tasks</span> <i class="bi bi-chevron-down"></i></a>
+                <ul>
+                    <li><a href="dashboard1.html"><img src="images/Letter P with phoenix concept logo.jpg" alt="Task Dashboard Icon" class="img-fluid mr-2"> Task Dashboard</a></li>
+                    <li><a href="taskmanagepage2.html"><img src="images/task1.jpg" alt="Tasks Page Icon" class="img-fluid mr-2"> Tasks</a></li>
+                    <li><a href="tb2.html"><img src="images/task2.jpg" alt="Progress Board Icon" class="img-fluid mr-2"> Progress Board</a></li>
+                    <li><a href="priority.html"><img src="images/task3.jpg" alt="Priority Tasks Icon" class="img-fluid mr-2"> Priority Tasks</a></li>
+                    <li><a href="calendar_scheduler.html"><img src="images/calendar.jpg" alt="Task Calendar Icon" class="img-fluid mr-2"> Task Calendar</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a id="nav-button"><img src="images/finance.jpg" alt="Finances Icon" class="img-fluid mr-2"><span>Finances</span> <i class="bi bi-chevron-down"></i></a>
+                <ul>
+                    <li><a href="Investment Dashboard.html"><img src="images/investment.jpg" alt="Investment Dashboard Icon" class="img-fluid mr-2"> Investment Dashboard</a></li>
+                    <li><a href="incomeTracker.html"><img src="images/Letter P with phoenix concept logo.jpg" alt="Portfolio Icon" class="img-fluid mr-2"> income tracker</a></li>
+                </ul>
+            </li>
+            <li><a href="logout.php"><img src="images/logout.jpg" alt="Logout Icon" class="img-fluid mr-2"> Logout</a></li>
+        </ul>
+    </div>
+    
+    <section>
+        <h1>Task Dashboard</h1>
+        <form id="taskForm">
+            <div class="form-group">
+                <label for="taskName">Task Name:</label>
+                <input type="text" id="taskName" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="taskDate">Task Date:</label>
+                <input type="date" id="taskDate" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="taskTime">Task Time:</label>
+                <input type="time" id="taskTime" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="taskPriority">Task Priority:</label>
+                <select id="taskPriority" class="form-control">
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Task</button>
+        </form>
+        <div id="taskList"></div>
+        <div id="calendar"></div>
+    </section>
+</body>
+
+</html>

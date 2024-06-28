@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Investment Registration</title>
+    <style>
+                .highlight-link {
+          color: #007bff; /* Blue color */
+          font-weight: bold; /* Bold text */
+        }
+        .error-fields {
+          display: none;
+          color: red;
+        }
+        /* Remove this extra style tag
+        <style>
+        */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        </style>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+        .form-group input[type="number"],
+        .form-group input[type="text"],
+        .form-group select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+            color: #333;
+        }
+        .form-group select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 10px top 50%;
+            background-size: 16px;
+            padding-right: 20px;
+        }
+        .form-group select::-ms-expand {
+            display: none;
+        }
+        .btn-submit {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Finance Investment Registration</h2>
+        
+        <form action="register.php" method="post">
+            <!-- Stocks Section -->
+            <section id="stocks-section" class="investment-section">
+                <h3>Stocks</h3>
+                <input type="hidden" name="investment-type[]" value="stocks">
+                <div class="form-group">
+                    <label for="stocks-amount">Investment Amount</label>
+                    <input type="number" name="stocks-amount[]" id="stocks-amount" placeholder="Enter amount">
+                </div>
+                <div class="form-group">
+                    <label for="stocks-company">Company (Optional)</label>
+                    <input type="text" name="stocks-company[]" id="stocks-company" placeholder="Enter company name">
+                </div>
+            </section>
+            
+            <!-- Bonds Section -->
+            <section id="bonds-section" class="investment-section">
+                <h3>Bonds</h3>
+                <input type="hidden" name="investment-type[]" value="bonds">
+                <div class="form-group">
+                    <label for="bonds-amount">Investment Amount</label>
+                    <input type="number" name="bonds-amount[]" id="bonds-amount" placeholder="Enter amount">
+                </div>
+                <div class="form-group">
+                    <label for="bonds-company">Company (Optional)</label>
+                    <input type="text" name="bonds-company[]" id="bonds-company" placeholder="Enter company name">
+                </div>
+            </section>
+            
+            <!-- Mutual Funds Section -->
+            <section id="mutual-funds-section" class="investment-section">
+                <h3>Mutual Funds</h3>
+                <input type="hidden" name="investment-type[]" value="mutual-funds">
+                <div class="form-group">
+                    <label for="mutual-funds-amount">Investment Amount</label>
+                    <input type="number" name="mutual-funds-amount[]" id="mutual-funds-amount" placeholder="Enter amount">
+                </div>
+                <div class="form-group">
+                    <label for="mutual-funds-company">Company (Optional)</label>
+                    <input type="text" name="mutual-funds-company[]" id="mutual-funds-company" placeholder="Enter company name">
+                </div>
+            </section>
+            
+            <!-- Real Estate Section -->
+            <section id="real-estate-section" class="investment-section">
+                <h3>Real Estate</h3>
+                <input type="hidden" name="investment-type[]" value="real-estate">
+                <div class="form-group">
+                    <label for="real-estate-amount">Investment Amount</label>
+                    <input type="number" name="real-estate-amount[]" id="real-estate-amount" placeholder="Enter amount">
+                </div>
+                <div class="form-group">
+                    <label for="real-estate-company">Company (Optional)</label>
+                    <input type="text" name="real-estate-company[]" id="real-estate-company" placeholder="Enter company name">
+                </div>
+            </section>
+
+            <!-- Cryptocurrencies Section -->
+            <section id="crypto-section" class="investment-section">
+                <h3>Cryptocurrencies</h3>
+                <input type="hidden" name="investment-type[]" value="cryptocurrencies">
+                <div class="form-group">
+                    <label for="crypto-amount">Investment Amount</label>
+                    <input type="number" name="crypto-amount[]" id="crypto-amount" placeholder="Enter amount">
+                </div>
+                <div class="form-group">
+                    <label for="crypto-currency">Currency</label>
+                    <input type="text" name="crypto-currency[]" id="crypto-currency" placeholder="Enter cryptocurrency name">
+                </div>
+            </section>
+
+            <!-- Sensex Section -->
+            <section id="sensex-section" class="investment-section">
+                <h3>Sensex</h3>
+                <input type="hidden" name="investment-type[]" value="sensex">
+                <div class="form-group">
+                    <label for="sensex-amount">Investment Amount</label>
+                    <input type="number" name="sensex-amount[]" id="sensex-amount" placeholder="Enter amount">
+                </div>
+                <div class="form-group">
+                    <label for="sensex-company">Company (Optional)</label>
+                    <input type="text" name="sensex-company[]" id="sensex-company" placeholder="Enter company name">
+                </div>
+            </section>
+
+            <!-- Nifty Section -->
+            <section id="nifty-section" class="investment-section">
+                <h3>Nifty</h3>
+                <input type="hidden" name="investment-type[]" value="nifty">
+                <div class="form-group">
+                    <label for="nifty-amount">Investment Amount</label>
+                    <input type="number" name="nifty-amount[]" id="nifty-amount" placeholder="Enter amount">
+                </div>
+                <div class="form-group">
+                    <label for="nifty-company">Company (Optional)</label>
+                    <input type="text" name="nifty-company[]" id="nifty-company" placeholder="Enter company name">
+                </div>
+            </section>
+
+            <!-- Commodities Section -->
+            <section id="commodities-section" class="investment-section">
+                <h3>Commodities</h3>
+                <input type="hidden" name="investment-type[]" value="commodities">
+                <div class="form-group">
+                    <label for="commodities-amount">Investment Amount</label>
+                    <input type="number" name="commodities-amount[]" id="commodities-amount" placeholder="Enter amount">
+                </div>
+                <div class="form-group">
+                    <label for="commodities-type">Type</label>
+                    <input type="text" name="commodities-type[]" id="commodities-type" placeholder="Enter commodity type">
+                </div>
+                <div class="form-group">
+                    <label for="commodities-company">Company (Optional)</label>
+                    <input type="text" name="commodities-company[]" id="commodities-company" placeholder="Enter company name">
+                </div>
+            </section>
+
+            <div class="form-group">
+                <button type="submit" class="btn-submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

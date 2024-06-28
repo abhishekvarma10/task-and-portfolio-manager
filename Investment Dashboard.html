@@ -1,0 +1,239 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="min-h-screen bg-zinc-900 text-zinc-100 flex">
+        <div class="w-64 bg-zinc-800 p-4">
+            <div class="flex items-center mb-8">
+                <img src="images/investment.jpg" alt="Logo" class="mr-2 w-6 h-6">
+                <span class="text-xl font-bold">Investment dashboard</span>
+            </div>
+            <nav>
+                <a href="dashboard1.html" class="flex items-center p-2 mb-2 bg-zinc-700">
+                    <img src="images/home.jpg" alt="home" class="mr-2 w-6 h-6">
+                    Home
+                </a>
+                <a href="Crypto Dashboard.html" class="flex items-center p-2 mb-2 bg-zinc-700 rounded">
+                    <img src="images/bitcoin.jpg" alt="Dashboard Icon" class="mr-2 w-6 h-6">
+                    Crypto
+                </a>
+                <a href="fundsdashboard.html" class="flex items-center p-2 mb-2">
+                    <img src="images/funds.jpg" alt="Portfolio Icon" class="mr-2 w-6 h-6">
+                    Mutual Funds 
+                </a>
+                <a href="stockdashboard.html" class="flex items-center p-2 mb-2">
+                    <img src="images/stocks.jpg" alt="Transaction Icon" class="mr-2 w-6 h-6">
+                    Stocks
+                </a>
+                <a href="equitydashboard.html" class="flex items-center p-2 mb-2">
+                    <img src="images/equity.jpg" alt="Saving Plan Icon" class="mr-2 w-6 h-6">
+                    Equity 
+                </a>
+                <a href="commoditydashboard.html" class="flex items-center p-2 mb-2">
+                    <img src="images/commodity.jpg" alt="Mutual Funds Icon" class="mr-2 w-6 h-6">
+                    Commodities
+                </a>
+                <a href="#" class="flex items-center p-2 mb-2">
+                    <img src="images/Settings_(iOS).png" alt="Settings Icon" class="mr-2 w-6 h-6">
+                    Settings
+                </a>
+                <a href="logout.php" class="flex items-center p-2 mb-2">
+                    <img src="images/logout.jpg" alt="Logout Icon" class="mr-2 w-6 h-6"> 
+                    Logout
+                </a>
+            </nav>
+        </div>
+        <div class="flex-1 p-6">
+            <header class="flex items-center justify-between mb-6">
+                <div>
+                    <h1 class="text-3xl font-bold">Welcome Back Abhishek Varma</h1>
+                    <p class="text-zinc-400">Happy to see you again, Get update of your asset today, good luck!!</p>
+                </div>
+                <div class="flex items-center">
+                    <input type="text" placeholder="Search investments" class="p-2 rounded bg-zinc-700 text-zinc-100 mr-4">
+                    <button class="p-2 rounded bg-zinc-700 text-zinc-100">🔔</button>
+                    <button class="p-2 rounded bg-zinc-700 text-zinc-100 ml-2">🔔</button>
+                </div>
+            </header>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-zinc-800 p-4 rounded">
+                    <h2 class="text-lg font-bold mb-2">My Investment Asset</h2>
+                    <p class="text-2xl font-bold">$11,543</p>
+                    <p class="text-green-500">+ $150 today</p>
+                </div>
+                <div class="bg-zinc-800 p-4 rounded">
+                    <h2 class="text-lg font-bold mb-2">Yearly Profits</h2>
+                    <p class="text-2xl font-bold">$88,742</p>
+                    <p class="text-green-500">10% + $150 today</p>
+                </div>
+                <div class="bg-zinc-800 p-4 rounded">
+                    <h2 class="text-lg font-bold mb-2">Profit Margin</h2>
+                    <p class="text-2xl font-bold">$48,632</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                <div class="bg-zinc-800 p-4 rounded">
+                    <h2 class="text-lg font-bold mb-2">Investment Details</h2>
+                    <p class="text-2xl font-bold">$178,975</p>
+                    <p class="text-green-500">6.75% This Month</p>
+                    <div class="mt-4">
+                        <div class="flex items-center mb-2">
+                            <span class="w-4 h-4 bg-purple-500 rounded-full mr-2"></span>
+                            <span>Money Market</span>
+                            <span class="ml-auto">$42,279 32%</span>
+                        </div>
+                        <div class="flex items-center mb-2">
+                            <span class="w-4 h-4 bg-blue-500 rounded-full mr-2"></span>
+                            <span>Crypto</span>
+                            <span class="ml-auto">$15,389 18%</span>
+                        </div>
+                        <div class="flex items-center mb-2">
+                            <span class="w-4 h-4 bg-teal-500 rounded-full mr-2"></span>
+                            <span>Stock</span>
+                            <span class="ml-auto">$19,572 12%</span>
+                        </div>
+                        <div class="flex items-center mb-2">
+                            <span class="w-4 h-4 bg-green-500 rounded-full mr-2"></span>
+                            <span>Equity</span>
+                            <span class="ml-auto">$6,793 6%</span>
+                        </div>
+                        <div class="flex items-center mb-2">
+                            <span class="w-4 h-4 bg-green-500 rounded-full mr-2"></span>
+                            <span>Commodity</span>
+                            <span class="ml-auto">$6,793 6%</span>
+                        </div>
+                        <div class="flex items-center mb-2">
+                            <span class="w-4 h-4 bg-green-500 rounded-full mr-2"></span>
+                            <span>Funds</span>
+                            <span class="ml-auto">$6,793 6%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-zinc-800 p-4 rounded">
+                    <h2 class="text-lg font-bold mb-2">Investment Statistic</h2>
+                    <p class="text-zinc-400 mb-4">Revealing risk, and growth in investments.</p>
+                    <div class="flex items-center mb-4">
+                        <button class="bg-zinc-700 text-zinc-100 p-2 rounded mr-2">All Mutual Fund</button>
+                        <button class="bg-zinc-700 text-zinc-100 p-2 rounded">Stock</button>
+                    </div>
+                    <canvas id="investmentChart" width="300" height="150"></canvas>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+                <div class="bg-zinc-800 p-4 rounded">
+                    <h2 class="text-lg font-bold mb-2">My Investment Assets</h2>
+                    <p class="text-zinc-400 mb-4">Explore investment asset and keep up to date</p>
+                    <div class="flex items-center mb-4">
+                        <button class="bg-zinc-700 text-zinc-100 p-2 rounded mr-2">Filters</button>
+                        <button class="bg-purple-500 text-zinc-100 p-2 rounded">See All</button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-zinc-700 p-4 rounded">
+                            <h3 class="text-lg font-bold">Apple</h3>
+                        </div>
+                        <div class="bg-zinc-700 p-4 rounded">
+                            <h3 class="text-lg font-bold">Microsoft</h3>
+                        </div>
+                        <div class="bg-zinc-700 p-4 rounded">
+                            <h3 class="text-lg font-bold">Alphabet</h3>
+                        </div>
+                        <div class="bg-zinc-700 p-4 rounded">
+                            <h3 class="text-lg font-bold">Nvidia</h3>
+                        </div>
+                        <div class="bg-zinc-700 p-4 rounded">
+                            <h3 class="text-lg font-bold">ABF Indonesia Bond I...</h3>
+                        </div>
+                        <div class="bg-zinc-700 p-4 rounded">
+                            <h3 class="text-lg font-bold">BNI-AM Indeks IDX30</h3>
+                            <span class="ml-auto">$6,793 6%</span>
+                        </div>
+                        <div class="bg-zinc-700 p-4 rounded">
+                            <h3 class="text-lg font-bold">Bitcoin</h3>
+                        </div>
+                        <div class="bg-zinc-700 p-4 rounded">
+                            <h3 class="text-lg font-bold">Ethereum</h3>
+                        </div>
+                        <div class="bg-zinc-700 p-4 rounded">
+                            <h3 class="text-lg font-bold">Doge</h3>
+                        </div>
+                        <div class="bg-zinc-700 p-4 rounded">
+                            <h3 class="text-lg font-bold">Gold</h3>
+                        </div>
+                        <div class="bg-zinc-700 p-4 rounded">
+                            <h3 class="text-lg font-bold">Silver</h3>
+                        </div>
+                        <div class="bg-zinc-700 p-4 rounded">
+                            <h3 class="text-lg font-bold">Platinum </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-zinc-800 p-4 rounded">
+                    <h2 class="text-lg font-bold mb-2">My Savings Plan</h2>
+                    <p class="text-zinc-400 mb-4">Saving plan based on your needs</p>
+                    <div class="bg-zinc-700 p-4 rounded">
+                        <h3 class="text-lg font-bold">Retirement Plan</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const ctx = document.getElementById('investmentChart').getContext('2d');
+        const investmentChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                datasets: [{
+                    label: 'Investments Over Time',
+                    data: [6500, 5900, 8000, 8100, 5600, 5500, 4000],
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        const pieCtx = document.getElementById('investmentPieChart').getContext('2d');
+        const investmentPieChart = new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Money Market', 'Crypto', 'Stock', 'Equity', 'Commodity', 'Funds'],
+                datasets: [{
+                    data: [42, 15, 19, 6, 6, 6],
+                    backgroundColor: [
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 159, 64, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+            }
+        });
+    </script>
+</body>
+</html>

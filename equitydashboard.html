@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="min-h-screen bg-zinc-900 text-white">
+        <div class="flex">
+            <div class="w-64 bg-zinc-800 p-4">
+                <div class="text-yellow-400 text-2xl font-bold mb-6">Equities</div>
+                <nav class="space-y-4">
+                    <a href="dashboard1.html" class="flex items-center text-zinc-300 hover:text-white">
+                        <img src="images/home.jpg" alt="home" class="mr-2 w-6 h-6" />
+                        Home
+                    </a>
+                    <a href="Investment Dashboard.html" class="flex items-center text-zinc-300 hover:text-white">
+                        <img src="images/Letter P with phoenix concept logo.jpg" alt="portfolio" class="mr-2 w-6 h-6" />
+                        My Portfolio
+                    </a>
+                    <a href="stockdashboard.html" class="flex items-center text-zinc-300 hover:text-white">
+                        <img src="images/stocks.jpg" alt="stock" class="mr-2 w-6 h-6" />
+                        Stocks
+                    </a>
+                    <a href="Crypto Dashboard.html" class="flex items-center text-zinc-300 hover:text-white">
+                        <img src="images/Crypto.jpg" alt="crypto" class="mr-2 w-6 h-6" />
+                        Cryptocurrency
+                    </a>
+                    <a href="commoditydashboard.html" class="flex items-center text-zinc-300 hover:text-white">
+                        <img src="images/commodity.jpg" alt="Commodity" class="mr-2 w-6 h-6 "/>
+                        Commodity
+                    </a>
+                    <a href="fundsdashboard.html" class="flex items-center text-zinc-300 hover:text-white">
+                        <img src="images/funds.jpg" alt="Funds" class="mr-2 w-6 h-6" />
+                        Funds
+                    </a>
+                    <a href="#" class="flex items-center text-zinc-300 hover:text-white">
+                        <img src="images/Settings_(iOS).png" alt="settings" class="mr-2 w-6 h-6" />
+                        Settings
+                    </a>
+                    <a href="logout.php" class="flex items-center p-2 mb-2">
+                        <img src="images/logout.jpg" alt="Logout Icon" class="mr-2 w-6 h-6"> 
+                        Logout
+                    </a>
+                </nav>
+            </div>
+            <div class="flex-1 p-6">
+                <div class="text-2xl font-bold mb-6">Equities / Prices</div>
+                <div class="bg-zinc-800 p-6 rounded-lg">
+                    <div id="equity-sections">
+                        <!-- Sections for each equity will be dynamically added here -->
+                    </div>
+                    <div class="mt-6">
+                        <select id="equity-select" class="bg-zinc-700 p-2 rounded-lg text-white">
+                            <option value="AAPL">Apple Inc. (AAPL)</option>
+                            <option value="GOOGL">Alphabet Inc. (GOOGL)</option>
+                            <option value="AMZN">Amazon.com Inc. (AMZN)</option>
+                        </select>
+                        <canvas id="equityTrendChart" width="600" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-zinc-800 p-4 rounded">
+        <h2 class="text-lg font-bold mb-2">Investment Details</h2>
+        <p class="text-2xl font-bold">$178,975</p>
+        <p class="text-green-500">6.75% This Month</p>
+        <canvas id="investmentPieChart" width="300" height="150"></canvas>
+    </div>
+    
+    <script>
+        const equityData = [
+            { name: "Apple Inc. (AAPL)", symbol: "AAPL", price: 0 },
+            { name: "Alphabet Inc. (GOOGL)", symbol: "GOOGL", price: 0 },
+            { name: "Amazon.com Inc. (AMZN)", symbol: "AMZN", price: 0 }
+        ];
+
+        function createEquitySection(equity) {
+            const section = document.createElement('div');
+            section.classList.add('mb-6', 'p-4', 'bg-zinc-700', 'rounded-lg');
+            section.innerHTML = `
+                <div class="flex justify-between items-center">
+                    <div>
+                        <div class="text-yellow-400 text-xl font-bold">${equity.name}</div>
+                        <div class="text-4xl font-bold" id="${equity.symbol}-price">$${equity.price.toFixed(2)}</div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('equity-sections').appendChild(section);
+        }
+
+        equityData.forEach(createEquitySection);
+
+        const ctxEquity = document.getElementById('equityTrendChart').getContext('2d');
+        const equityTrendChart = new Chart(ctxEquity, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Price',
+                    data: [],
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+        const pieCtx = document.getElementById('investmentPieChart').getContext('2d');
+const investmentPieChart = new Chart(pieCtx, {
+    type: 'pie',
+    data: {
+        labels: ['Money Market', 'Crypto', 'Stock', 'Equity', 'Commodity', 'Funds'],
+        datasets: [{
+            data: [42, 15, 19, 6, 6, 6],
+            backgroundColor: [
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 206, 86, 0.2)'
+            ],
+            borderColor: [
+                'rgba(153, 102, 255, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(255, 206, 86, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+    }
+});
+
+
+        async function fetchEquityData() {
+            const promises = equityData.map(async (equity) => {
+                const symbol = equity.symbol;
+                const url = `put your api key here`;
+                const response = await fetch(url);
+                const data = await response.json();
+                const lastRefreshed = data['Meta Data']['3. Last Refreshed'];
+                const price = data['Time Series (1min)'][lastRefreshed]['1. open'];
+                return { symbol, price: parseFloat(price) };
+            });
+
+            const results = await Promise.all(promises);
+            results.forEach(({ symbol, price }) => {
+                const priceElement = document.getElementById(`${symbol}-price`);
+                if (priceElement) {
+                    priceElement.textContent = `$${price.toFixed(2)}`;
+                }
+            });
+
+            // Update the trend chart after fetching data
+            updateEquityTrend();
+        }
+
+        async function updateEquityTrend() {
+            const equityId = document.getElementById('equity-select').value;
+            const url = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${equityId}&interval=1min&apikey=6780O6XBOLT1L152`;
+            const response = await fetch(url);
+            const data = await response.json();
+            const trends = data['Time Series (1min)'];
+            const labels = Object.keys(trends).reverse();
+            const prices = labels.map(label => parseFloat(trends[label]['1. open']));
+
+            equityTrendChart.data.labels = labels;
+            equityTrendChart.data.datasets[0].data = prices;
+            equityTrendChart.update();
+        }
+
+        document.getElementById('equity-select').addEventListener('change', updateEquityTrend);
+
+        // Initial data fetch and chart update
+        fetchEquityData();
+        setInterval(fetchEquityData, 5000); // Update data every 5 seconds
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar Scheduler with Google Calendar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5;
+            padding: 20px;
+            position: relative;
+        }
+        .calendar-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+        }
+        .plus-sign {
+            display: none;
+            font-size: 1.5rem;
+            color: #007bff;
+            position: absolute;
+            cursor: pointer;
+        }
+        .hover-date {
+            display: block;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+        }
+        input[type="text"], input[type="date"], input[type="time"], input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-template-rows: repeat(6, 1fr);
+        }
+        .overlay div {
+            pointer-events: auto;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calendar-container">
+    <iframe id="calendarFrame" src="https://calendar.google.com/calendar/embed?src=d4ef42055718536697e91a8abe62229e36a8831983542151791be2876c8a6350%40group.calendar.google.com&ctz=UTC" style="border: 0; width: 100%; height: 100%;" frameborder="0" scrolling="no"></iframe>
+    <div class="overlay" id="calendarOverlay"></div>
+</div>
+
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Schedule Task</h2>
+        <form id="taskForm">
+            <label for="taskName">Task Name:</label>
+            <input type="text" id="taskName" name="taskName" required>
+            
+            <label for="taskDate">Task Date:</label>
+            <input type="date" id="taskDate" name="taskDate" required>
+            
+            <label for="taskStartTime">Start Time:</label>
+            <input type="time" id="taskStartTime" name="taskStartTime" required>
+            
+            <label for="taskEndTime">End Time:</label>
+            <input type="time" id="taskEndTime" name="taskEndTime" required>
+            
+            <label for="taskPlace">Place:</label>
+            <input type="text" id="taskPlace" name="taskPlace" required>
+            
+            <label for="taskAlarm">Alarm (minutes before):</label>
+            <input type="number" id="taskAlarm" name="taskAlarm" required>
+            
+            <button type="submit">Schedule Task</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var modal = document.getElementById("myModal");
+        var span = document.getElementsByClassName("close")[0];
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        var overlay = document.getElementById('calendarOverlay');
+
+        // Create overlay grid cells
+        for (var i = 0; i < 42; i++) { // 7 days x 6 weeks
+            var cell = document.createElement('div');
+            var plusSign = document.createElement('div');
+            plusSign.classList.add('plus-sign');
+            plusSign.textContent = '+';
+            cell.appendChild(plusSign);
+
+            cell.addEventListener('mouseover', function() {
+                this.querySelector('.plus-sign').classList.add('hover-date');
+            });
+
+            cell.addEventListener('mouseout', function() {
+                this.querySelector('.plus-sign').classList.remove('hover-date');
+            });
+
+            cell.addEventListener('click', function() {
+                var selectedDate = new Date(); // Replace with actual date logic
+                var formattedDate = selectedDate.toISOString().split('T')[0];
+                document.getElementById('taskDate').value = formattedDate;
+                modal.style.display = "block";
+            });
+
+            overlay.appendChild(cell);
+        }
+
+        // Submit task form
+        document.getElementById('taskForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var taskName = document.getElementById('taskName').value;
+            var taskDate = document.getElementById('taskDate').value;
+            var taskStartTime = document.getElementById('taskStartTime').value;
+            var taskEndTime = document.getElementById('taskEndTime').value;
+            var taskPlace = document.getElementById('taskPlace').value;
+            var taskAlarm = document.getElementById('taskAlarm').value;
+            var taskStartDateTime = taskDate + 'T' + taskStartTime;
+            var taskEndDateTime = taskDate + 'T' + taskEndTime;
+
+            // Implement your task scheduling logic here, e.g., send to backend, store in database, etc.
+            alert(`Task Scheduled: ${taskName} on ${taskDate} from ${taskStartTime} to ${taskEndTime} at ${taskPlace}. Alarm set for ${taskAlarm} minutes before.`);
+
+            // Clear form fields
+            document.getElementById('taskForm').reset();
+
+            // Close modal
+            modal.style.display = "none";
+        });
+    });
+</script>
+
+</body>
+</html>

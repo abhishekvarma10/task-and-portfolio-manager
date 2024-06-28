@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager 2</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .hidden { display: none; }
+    </style>
+</head>
+<body class="font-sans">
+<div class="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 flex">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white dark:bg-gray-800 p-4">
+        <nav>
+            <a href="#" class="flex items-center mb-4">
+                <img src="images/myself.jpg" alt="profile-pic" class="mr-2 w-6 h-6">Abhishek
+            </a>
+            <a href="dashboard1.html" class="flex items-center mb-4">
+                <img src="images/dashboard.jpg" alt="Task Dashboard Icon" class="mr-2 w-6 h-6"> Task Dashboard
+            </a>
+            <a href="taskmanagepage2.html" class="flex items-center mb-4">
+                <img src="images/task1.jpg" alt="Tasks Page Icon" class="mr-2 w-6 h-6"> Tasks
+            </a>
+            <a href="tb2.html" class="flex items-center mb-4">
+                <img src="images/task2.jpg" alt="Progress Board Icon" class="mr-2 w-6 h-6"> Progress Board
+            </a>
+            <a href="priority.html" class="flex items-center mb-4">
+                <img src="images/task3.jpg" alt="Priority Tasks Icon" class="mr-2 w-6 h-6"> Priority Tasks
+            </a>
+            <a href="calendar_scheduler.html" class="flex items-center mb-4">
+                <img src="images/calendar.jpg" alt="Task Calendar Icon" class="mr-2 w-6 h-6"> Task Calendar
+            </a>
+            <a href="logout.php" class="flex items-center p-2 mb-2">
+                <img src="images/logout.jpg" alt="Logout Icon" class="mr-2 w-6 h-6"> Logout
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 p-6">
+        <div class="flex justify-between items-center mb-4">
+            <div class="text-2xl font-semibold">Task Management</div>
+            <button class="bg-blue-500 text-white px-4 py-2 rounded">Add Task</button>
+        </div>
+        <div class="flex space-x-4 mb-4">
+            <button class="px-4 py-2 bg-zinc-200 dark:bg-zinc-700 rounded">Overview</button>
+            <button class="px-4 py-2 bg-zinc-200 dark:bg-zinc-700 rounded" onclick="location.href='tb2.html'">Board</button>
+            <button class="px-4 py-2 bg-zinc-200 dark:bg-zinc-700 rounded" onclick="location.href='priority.html'">By Priority</button>
+            <div class="flex items-center space-x-4">
+                <button class="bg-blue-600 text-white px-4 py-2 rounded-lg">Ask AI</button>
+            </div>
+        </div>
+        <div class="grid grid-cols-3 gap-4 mb-4">
+            <div class="bg-white dark:bg-zinc-800 p-4 rounded shadow">
+                <div class="text-lg font-semibold mb-2">Recent</div>
+                <div class="text-zinc-500">Your recent opened items will show here.</div>
+            </div>
+            <div class="bg-white dark:bg-zinc-800 p-4 rounded shadow">
+                <div class="flex justify-between items-center mb-2">
+                    <div class="text-lg font-semibold">Docs</div>
+                    <button class="text-blue-500" onclick="document.getElementById('doc-upload').click()">+</button>
+                    <input type="file" id="doc-upload" class="hidden" onchange="handleFileUpload(event, 'Docs')" />
+                </div>
+                <div class="text-zinc-500" id="doc-content">You haven't added any Docs to this location.</div>
+            </div>
+            <div class="bg-white dark:bg-zinc-800 p-4 rounded shadow">
+                <div class="flex justify-between items-center mb-2">
+                    <div class="text-lg font-semibold">Resources</div>
+                    <button class="text-blue-500" onclick="document.getElementById('resource-upload').click()">+</button>
+                    <input type="file" id="resource-upload" class="hidden" onchange="handleFileUpload(event, 'Resources')" />
+                </div>
+                <div class="text-zinc-500" id="resource-content">Drop files here to attach</div>
+            </div>
+        </div>
+        <div class="bg-white dark:bg-zinc-800 p-4 rounded shadow">
+            <div class="text-lg font-semibold mb-4">Lists</div>
+            <table class="w-full text-left">
+                <thead>
+                    <tr>
+                        <th class="pb-2">Name</th>
+                        <th class="pb-2">Color</th>
+                        <th class="pb-2">Progress</th>
+                        <th class="pb-2">Start</th>
+                        <th class="pb-2">End</th>
+                        <th class="pb-2">Priority</th>
+                        <th class="pb-2">Owner</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="py-2">Action Items</td>
+                        <td class="py-2"><span class="inline-block w-4 h-4 bg-purple-500 rounded-full"></span></td>
+                        <td class="py-2">
+                            <div class="w-full bg-zinc-200 rounded-full h-2.5 dark:bg-zinc-700">
+                                <div class="bg-purple-500 h-2.5 rounded-full" id="progress-action-items" style="width: 20%"></div>
+                            </div>
+                            <span class="ml-2" id="progress-text-action-items">1/5</span>
+                        </td>
+                        <td class="py-2"><img src="https://placehold.co/20x20" alt="Start"/></td>
+                        <td class="py-2"><img src="https://placehold.co/20x20" alt="End"/></td>
+                        <td class="py-2"><img src="https://placehold.co/20x20" alt="Priority"/></td>
+                        <td class="py-2"><img src="https://placehold.co/20x20" alt="Owner"/></td>
+                    </tr>
+                    <tr>
+                        <td class="py-2">Ideas</td>
+                        <td class="py-2"><span class="inline-block w-4 h-4 bg-zinc-500 rounded-full"></span></td>
+                        <td class="py-2">
+                            <div class="w-full bg-zinc-200 rounded-full h-2.5 dark:bg-zinc-700">
+                                <div class="bg-zinc-500 h-2.5 rounded-full" id="progress-ideas" style="width: 0%"></div>
+                            </div>
+                            <span class="ml-2" id="progress-text-ideas">0/4</span>
+                        </td>
+                        <td class="py-2"><img src="https://placehold.co/20x20" alt="Start"/></td>
+                        <td class="py-2"><img src="https://placehold.co/20x20" alt="End"/></td>
+                        <td class="py-2"><img src="https://placehold.co/20x20" alt="Priority"/></td>
+                        <td class="py-2"><img src="https://placehold.co/20x20" alt="Owner"/></td>
+                    </tr>
+                    <tr>
+                        <td class="py-2">Backlog</td>
+                        <td class="py-2"><span class="inline-block w-4 h-4 bg-zinc-500 rounded-full"></span></td>
+                        <td class="py-2">
+                            <div class="w-full bg-zinc-200 rounded-full h-2.5 dark:bg-zinc-700">
+                                <div class="bg-zinc-500 h-2.5 rounded-full" id="progress-backlog" style="width: 0%"></div>
+                            </div>
+                            <span class="ml-2" id="progress-text-backlog">0/3</span>
+                        </td>
+                        <td class="py-2"><img src="https://placehold.co/20x20" alt="Start"/></td>
+                        <td class="py-2"><img src="https://placehold.co/20x20" alt="End"/></td>
+                        <td class="py-2"><img src="https://placehold.co/20x20" alt="Priority"/></td>
+                        <td class="py-2"><img src="https://placehold.co/20x20" alt="Owner"/></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="mt-4 text-blue-500 cursor-pointer" onclick="addNewList()">+ New List</div>
+        </div>
+    </main>
+</div>
+
+<script>
+    function handleFileUpload(event, type) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const contentElement = document.getElementById(type.toLowerCase() + '-content');
+                contentElement.textContent = file.name;
+            };
+            reader.readAsText(file);
+        }
+    }
+
+    function addNewList() {
+        const table = document.querySelector('tbody');
+        const newRow = document.createElement('tr');
+
+        newRow.innerHTML = `
+            <td class="py-2">New List</td>
+            <td class="py-2"><span class="inline-block w-4 h-4 bg-zinc-500 rounded-full"></span></td>
+            <td class="py-2">
+                <div class="w-full bg-zinc-200 rounded-full h-2.5 dark:bg-zinc-700">
+                    <div class="bg-zinc-500 h-2.5 rounded-full" id="progress-new-list" style="width: 0%"></div>
+                </div>
+                <span class="ml-2" id="progress-text-new-list">0/0</span>
+            </td>
+            <td class="py-2"><img src="https://placehold.co/20x20" alt="Start"/></td>
+            <td class="py-2"><img src="https://placehold.co/20x20" alt="End"/></td>
+            <td class="py-2"><img src="https://placehold.co/20x20" alt="Priority"/></td>
+            <td class="py-2"><img src="https://placehold.co/20x20" alt="Owner"/></td>
+        `;
+
+        table.appendChild(newRow);
+    }
+</script>
+</body>
+</html>

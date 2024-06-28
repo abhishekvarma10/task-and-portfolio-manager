@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Signup Page</title>
+  <link href="asset/css/bootstrap.min.css" rel="stylesheet">
+  <link href="asset/css/font-awesome.min.css" rel="stylesheet">
+  <link href="asset/css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+    }
+
+    .highlight-link {
+      color: #007bff;
+      font-weight: bold;
+    }
+
+    .error-fields {
+      display: none;
+      color: red;
+    }
+
+    #signupButton {
+      background-color: rgb(44, 214, 44);
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #signupButton:hover {
+      background-color: #0056b3;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .input-group-text {
+      padding: 8px;
+    }
+
+    .input-group-text i {
+      font-size: 1rem;
+      color: #c1bdbd;
+    }
+
+    .input-group {
+      position: relative;
+      width: 100%;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.5rem;
+      padding-right: 2.5rem;
+      background-color: #333;
+      color: #fff;
+      border: 1px solid #444;
+      border-radius: 0.25rem;
+    }
+
+    .form-control::placeholder {
+      color: #bbb;
+    }
+
+    .input-group-text {
+      position: absolute;
+      right: 0.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      background-color: transparent;
+      border: none;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="form-01-main">
+    <div class="form-cover">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-sub-main">
+              <div class="_main_head_as">
+                <a href="#">
+                  <img src="asset/images/vector.png" alt="Logo">
+                </a>
+              </div>
+              <form id="signupForm" method="post" action="signup.php">
+                <div class="form-group">
+                  <input id="email" name="email" class="form-control _ge_de_ol" type="email" placeholder="Enter Email" required aria-required="true">
+                </div>
+                <div class="form-group" style="position: relative;">
+                  <input id="password" type="password" class="form-control" name="password" placeholder="Enter password" required>
+                  <i toggle="#password" class="fa fa-eye toggle-password" aria-hidden="true" onclick="togglePasswordVisibility('password', this)"></i>
+                </div>
+                <div class="form-group" style="position: relative;">
+                  <input id="confirm_password" type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required>
+                  <i toggle="#confirm_password" class="fa fa-eye toggle-password" aria-hidden="true" onclick="togglePasswordVisibility('confirm_password', this)"></i>
+                  </div>
+                 <div class="error-fields">
+                  <p>passwords do not match</p>
+                 </div>           
+                     
+                <div class="form-group">  
+                  <input id="first_name" type="text" class="form-control" name="first_name" placeholder="First Name">
+                </div>
+                <div class="form-group">
+                  <input id="last_name" type="text" class="form-control" name="last_name" placeholder="Last Name">
+                </div>
+                <div class="form-group">
+                  <input id="dob" type="date" class="form-control" name="dob" placeholder="Date of Birth">
+                </div>
+                <div class="form-group">
+                  <select title="option" id="gender" class="form-control" name="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <input id="phone_number" type="tel" class="form-control" name="phone_number" placeholder="Phone Number">
+                </div>
+                <div class="form-group ">
+                  <button id="signupButton" type="submit"><span>Sign up</span></button>
+                </div>
+                </form>
+              <div class="form-group">
+                <div class="check_box_main">
+                  <p>Already have an account? <a href="login.html" class="pas-text highlight-link">Login</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JavaScript for form validation and password toggle -->
+  <script>
+    function togglePasswordVisibility(fieldId, icon) {
+      const passwordField = document.getElementById(fieldId);
+
+      if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+      } else {
+        passwordField.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+      }
+    }
+
+    document.getElementById("signupForm").addEventListener("submit", function(event) {
+      var password = document.getElementById("password").value;
+      var confirmPassword = document.getElementById("confirm_password").value;
+      
+      if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        event.preventDefault(); // Prevent form submission
+      } else if (password.length < 8) {
+        alert("Password must be at least 8 characters long.");
+        event.preventDefault(); // Prevent form submission
+      }
+    });
+  </script>
+</body>
+
+</html>

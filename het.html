@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <link href="asset/css/bootstrap.min.css" rel="stylesheet">
+  <link href="asset/css/font-awesome.min.css" rel="stylesheet">
+  <link href="asset/css/style.css" rel="stylesheet">
+
+  <title>Bootstrap 5 Login Page Design</title>
+
+  <style>
+    .highlight-link {
+      color: #007bff; /* Blue color */
+      font-weight: bold; /* Bold text */
+    }
+    .error-fields {
+      display: none;
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <section class="form-01-main">
+    <div class="form-cover">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-sub-main">
+              <div class="_main_head_as">
+                <a href="#">
+                  <img src="asset/images/vector.png">
+                </a>
+              </div>
+              <div class="form-group">
+                <input id="email" name="email" class="form-control _ge_de_ol" type="text" placeholder="Enter Email" required="" aria-required="true">
+              </div>
+
+              <div class="form-group">                                              
+                <input id="password" type="password" class="form-control" name="password" placeholder="Enter password" required="required">
+                <i toggle="#password" class="fa fa-fw fa-eye toggle-password" onclick="togglePasswordVisibility()"></i>
+              </div>
+
+              <div class="form-group">
+                <div class="check_box_main">
+                  <a href="forgotpassword.html" class="pas-text">Forgot Password</a>
+                </div>
+              </div>
+
+              <div class="form-group ">
+                <div class="btn_uy">
+                  <a id="loginBtn" href="#"><span>Login</span></a>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="check_box_main">
+                  <p>Don't have an account? <a href="signup.html" class="pas-text highlight-link">Sign Up</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JavaScript code for redirection -->
+  <script>
+    document.getElementById("loginBtn").addEventListener("click", function(event) {
+      event.preventDefault(); // Prevent default link behavior
+      // You can add login logic here (validation, authentication, etc.)
+
+      // Assume login failed for demonstration purposes
+      var loginFailed = true;
+
+      if (loginFailed) {
+        // Show error fields
+        document.querySelectorAll('.error-fields').forEach(function(element) {
+          element.style.display = 'block';
+        });
+      } else {
+        // Redirect to dashboard page after successful login
+        window.location.href = "dashboard.html";
+      }
+    });
+    function togglePasswordVisibility() {
+            const passwordField = document.getElementById('password');
+            const togglePassword = document.getElementById('togglePassword');
+
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                togglePassword.classList.remove('fa-eye');
+                togglePassword.classList.add('fa-eye-slash');
+            } else {
+                passwordField.type = 'password';
+                togglePassword.classList.remove('fa-eye-slash');
+                togglePassword.classList.add('fa-eye');
+            }
+        }
+  </script>
+</body>
+
+</html>
