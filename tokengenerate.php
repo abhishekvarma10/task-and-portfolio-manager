@@ -7,8 +7,8 @@ use Plaid\PlaidRequestException;
 use Plaid\PlaidServers;
 
 // Replace with your Plaid API credentials and desired environment
-$PLAID_CLIENT_ID = '66797cbc5638d4001aa90809';
-$PLAID_SECRET = '7248ee9d2fc075c39ef8936d7e4703';
+$PLAID_CLIENT_ID = '';
+$PLAID_SECRET = '';
 $PLAID_ENV = PlaidServers::SANDBOX; // or PlaidServers::DEVELOPMENT or PlaidServers::PRODUCTION
 
 // Initialize Plaid client
